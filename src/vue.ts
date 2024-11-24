@@ -23,7 +23,7 @@ export const vAdjustScrollbarWidth: Directive<HTMLElement> = {
     },
 };
 
-export const vMarKScrollable: Directive<HTMLElement> = {
+export const vMarkScrollable: Directive<HTMLElement> = {
     mounted(el: HTMLElement) {
         markScrollable(el);
     },
