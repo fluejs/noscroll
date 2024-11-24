@@ -1,0 +1,53 @@
+{
+    "name": "@fluejs/noscroll",
+    "version": "0.0.0",
+    "description": "Disable scrollbar on your web-page",
+    "repository": "git@github.com:fluejs/noscroll.git",
+    "author": "fl3nkey",
+    "license": "UNLICENSED",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.mjs"
+        },
+        "./touch": {
+            "types": "./dist/touch.d.ts",
+            "require": "./dist/touch.cjs",
+            "import": "./dist/touch.mjs"
+        },
+        "./vue": {
+            "types": "./dist/vue.d.ts",
+            "require": "./dist/vue.cjs",
+            "import": "./dist/vue.mjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "unbuild",
+        "lint:check": "eslint ./src/**/*",
+        "types:check": "tsc",
+        "docs:dev": "vitepress dev docs",
+        "docs:build": "vitepress build docs",
+        "docs:preview": "vitepress preview docs"
+    },
+    "devDependencies": {
+        "eslint": "8.57.1",
+        "eslint-config-fl3nkey-base": "1.0.4",
+        "eslint-config-fl3nkey-typescript": "1.0.3",
+        "eslint-config-fl3nkey-vue3": "1.0.5",
+        "tsc": "2.0.4",
+        "typescript": "5.2.2",
+        "unbuild": "2.0.0",
+        "vitepress": "1.5.0",
+        "vitepress-plugin-tabs": "^0.5.0",
+        "vue": "3.5.13"
+    },
+    "packageManager": "yarn@1.22.22"
+}
