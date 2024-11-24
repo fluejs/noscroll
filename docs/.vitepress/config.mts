@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs';
 
 export default defineConfig({
-    appearance: 'dark',
+    appearance: 'force-dark',
     title: '@fluejs/noscroll',
     description: 'Disable scrollbar on your web-page',
     markdown: {
