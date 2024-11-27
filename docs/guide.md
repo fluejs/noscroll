@@ -15,7 +15,6 @@ This is a new, TypeScript-based and improved version of the [scroll-lock](https:
 ### Via package manager
 
 ::: code-group
-
 ```shell [npm]
 npm install --save-dev @fluejs/noscroll
 ```
@@ -23,7 +22,6 @@ npm install --save-dev @fluejs/noscroll
 ```shell [yarn]
 yarn add -D @fluejs/noscroll
 ```
-
 :::
 
 That's it! Now you can use `@fluejs/noscroll`.
@@ -166,3 +164,115 @@ isPageScrollDisabled.value = true;
 isPageScrollDisabled.value = false;
 </script>
 ```
+
+## Migration from scroll-lock
+
+Overall, `noscroll` has a similar API, but there are nuances nonetheless. The main difference is that `scroll-lock` could accept DOM nodes, selectors, or even manually specified data-* attributes. In contrast, `noscroll` takes a slightly different approach and only accepts DOM nodes.
+
+### Scrollbar width adjustment (Filling the gap)
+
+::: code-group
+```js [scroll-lock]
+import { addFillGapTarget, addFillGapSelector } from 'scroll-lock';
+
+//selector
+addFillGapSelector('.my-fill-gap-selector');
+
+//element
+const el = document.querySelector('.my-fill-gap-element');
+addFillGapTarget(el);
+
+// or via html data-* attribute
+// <div data-scroll-lock-fill-gap></div>
+```
+
+```ts [noscroll]
+import { adjustScrollbarWidth } from '@fluejs/noscroll';
+
+const el = document.querySelector<HTMLElement>('some-element-selector');
+
+adjustScrollbarWidth(el);
+```
+:::
+
+
+Also, `scroll-lock` offered several methods for scrollbar width adjustment (padding, margin, width, max-width).
+
+In `noscroll`, calling `adjustScrollbarWidth` will only add padding. To implement a different method (e.g., max-width), you can use the CSS variable `--noscroll-target-scrollbar-width`. In this case, you don't need to call `adjustScrollbarWidth` on the target element.
+
+::: code-group
+```js [scroll-lock]
+import { setFillGapMethod } from 'scroll-lock';
+
+setFillGapMethod('max-width');
+```
+
+```css [noscroll]
+.my-fixed-element {
+    max-width: calc(100% - var(--noscroll-target-scrollbar-width), 0px);
+}
+```
+:::
+
+### Mark scrollable
+
+> [!NOTE]
+> Marking a scrollable element in `noscroll` makes no sense unless you are using [noscroll/touch](#handle-touch-events)
+
+::: code-group
+```js [scroll-lock]
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+
+const $scrollableElement = document.querySelector('.my-scrollable-element');
+
+// passing scrollable element as argument of enable/disable scroll methods
+disablePageScroll($scrollableElement);
+enablePageScroll($scrollableElement);
+
+// or via html data-* attribute
+// <div data-scroll-lock-scrollable></div>
+```
+
+```ts [noscroll]
+import {markScrollable} from "@fluejs/noscroll";
+
+const el = document.querySelector<HTMLElement>('some-element-selector');
+
+markScrollable(el);
+```
+:::
+
+### Lockable elements
+
+In `scroll-lock`, you could specify "lockable" elements. These elements would also have their scrollbar disabled when scroll on the page was disabled. In `noscroll`, scrollbar for elements can be disabled directly.
+
+::: code-group
+```js [scroll-lock]
+import { disablePageScroll, addLockableTarget } from 'scroll-lock';
+
+const el = document.querySelector<HTMLElement>('some-element-selector');
+
+addLockableTarget(el);
+disablePageScroll();
+
+// or via html data-* attribute
+// <div data-scroll-lock-fill-gap></div>
+```
+
+```ts [noscroll]
+import {
+    disablePageScroll,
+    enablePageScroll,
+    disableScroll,
+    enableScroll,
+} from '@fluejs/noscroll';
+
+const el = document.querySelector<HTMLElement>('some-element-selector');
+
+disableScroll(el);
+disablePageScroll();
+
+enableScroll(el);
+enablePageScroll();
+```
+:::
