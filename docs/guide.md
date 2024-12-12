@@ -109,7 +109,7 @@ If you're still not satisfied with the current behavior in iOS Safari, you can u
 
 ```ts
 import {createNoScroll, markScrollable} from '@fluejs/noscroll';
-import {initTouchHandler, resetTouchHander} from '@fluejs/noscroll/touch';
+import {initTouchHandler, resetTouchHandler} from '@fluejs/noscroll/touch';
 
 const scrollable = document.querySelector<HTMLElement>('some-scrollable-selector');
 
@@ -122,7 +122,7 @@ const {
     enablePageScroll,
 } = createNoScroll({
     onInitScrollDisable: initTouchHandler,
-    onResetScrollDisable: resetTouchHander,
+    onResetScrollDisable: resetTouchHandler,
 });
 
 // disable page scroll
