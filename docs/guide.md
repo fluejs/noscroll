@@ -98,7 +98,7 @@ Or via CSS variable `--noscroll-target-scrollbar-width`
 
 ```css
 .my-fixed-element {
-    max-width: calc(100% - var(--noscroll-target-scrollbar-width), 0px);
+    max-width: calc(100% - var(--noscroll-target-scrollbar-width, 0px));
 }
 ```
 :::
@@ -209,7 +209,7 @@ setFillGapMethod('max-width');
 
 ```css [noscroll]
 .my-fixed-element {
-    max-width: calc(100% - var(--noscroll-target-scrollbar-width), 0px);
+    max-width: calc(100% - var(--noscroll-target-scrollbar-width, 0px));
 }
 ```
 :::
